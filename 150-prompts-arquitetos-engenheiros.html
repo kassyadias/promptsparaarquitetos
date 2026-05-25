@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>150 Prompts para Arquitetos e Engenheiros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f7f7f5;
+    --bg3: #f0f0ec;
+    --text: #1a1a1a;
+    --text2: #555;
+    --text3: #999;
+    --border: #e5e5e0;
+    --border2: #d0d0c8;
+    --accent: #185FA5;
+    --accent-light: #e8f1fb;
+    --accent-text: #0c447c;
+    --green: #3B6D11;
+    --green-light: #eaf3de;
+    --amber: #854F0B;
+    --amber-light: #faeeda;
+    --purple: #533489;
+    --purple-light: #EEEDFE;
+    --teal: #0F6E56;
+    --teal-light: #E1F5EE;
+    --coral: #993C1D;
+    --coral-light: #FAECE7;
+    --pink: #72243E;
+    --pink-light: #FBEAF0;
+    --gray: #5F5E5A;
+    --gray-light: #F1EFE8;
+    --red: #A32D2D;
+    --red-light: #FCEBEB;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg2);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    gap: 16px;
+  }
+  .logo { font-size: 15px; font-weight: 600; color: var(--text); white-space: nowrap; }
+  .logo span { color: var(--accent); }
+  .header-search {
+    flex: 1;
+    max-width: 340px;
+    position: relative;
+  }
+  .header-search input {
+    width: 100%;
+    padding: 7px 12px 7px 34px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    background: var(--bg2);
+    color: var(--text);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .header-search input:focus { border-color: var(--accent); background: var(--bg); }
+  .header-search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text3); }
+  .header-count { font-size: 13px; color: var(--text3); white-space: nowrap; }
+
+  /* LAYOUT */
+  .layout { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  /* HERO */
+  .hero { margin-bottom: 28px; }
+  .hero h1 { font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+  .hero p { font-size: 14px; color: var(--text2); }
+  .stats-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .stat-pill {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .stat-pill strong { font-weight: 600; color: var(--accent); }
+
+  /* CATEGORY FILTER */
+  .cat-section { margin-bottom: 20px; }
+  .cat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 8px; }
+  .cat-filter { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cat-btn {
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    background: var(--bg);
+    color: var(--text2);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .cat-btn:hover { background: var(--bg3); border-color: var(--border2); }
+  .cat-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* AI LEGEND */
+  .ai-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; align-items: center; }
+  .legend-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-right: 4px; }
+  .ai-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 12px;
+    border: 1px solid;
+  }
+
+  /* PROMPTS LIST */
+  .prompts-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .prompt-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .prompt-card:hover { border-color: var(--border2); }
+  .prompt-card.open { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+
+  .card-trigger {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+  }
+  .card-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text3);
+    min-width: 32px;
+    padding-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .card-info { flex: 1; }
+  .card-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+  .cat-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 8px;
+  }
+  .ai-badges { display: flex; gap: 4px; flex-wrap: wrap; }
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 8px;
+    border: 1px solid;
+  }
+  .chevron {
+    width: 18px;
+    height: 18px;
+    color: var(--text3);
+    flex-shrink: 0;
+    transition: transform .2s;
+    margin-top: 2px;
+  }
+  .open .chevron { transform: rotate(180deg); }
+
+  .card-body {
+    display: none;
+    padding: 0 16px 16px 60px;
+  }
+  .open .card-body { display: block; }
+
+  .prompt-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    font-size: 12.5px;
+    font-family: 'Courier New', monospace;
+    line-height: 1.7;
+    color: var(--text2);
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 10px;
+  }
+  .card-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text2);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .15s;
+  }
+  .copy-btn:hover { background: var(--bg3); }
+  .copy-btn.copied { color: var(--green); border-color: var(--green); background: var(--green-light); }
+  .compat-note { font-size: 11px; color: var(--text3); }
+
+  /* EMPTY */
+  .empty { text-align: center; padding: 48px 16px; color: var(--text3); font-size: 14px; }
+  .empty-icon { font-size: 32px; margin-bottom: 8px; }
+
+  /* PAGINATION */
+  .pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 28px; flex-wrap: wrap; }
+  .page-btn {
+    padding: 6px 13px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text2);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .page-btn:hover:not(:disabled) { background: var(--bg3); }
+  .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .page-btn:disabled { opacity: .35; cursor: default; }
+  .page-ellipsis { color: var(--text3); font-size: 13px; padding: 0 4px; }
+
+  /* FOOTER */
+  .site-footer { text-align: center; padding: 24px 16px; font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); margin-top: 40px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .header-inner { height: auto; padding: 12px 0; flex-wrap: wrap; }
+    .header-search { max-width: 100%; order: 3; flex: 1 1 100%; }
+    .hero h1 { font-size: 20px; }
+    .card-body { padding-left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">Prompts <span>ARQ+ENG</span></div>
+    <div class="header-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Buscar prompt, categoria ou IA..." oninput="filterPrompts()">
+    </div>
+    <div class="header-count" id="headerCount">150 prompts</div>
+  </div>
+</header>
+
+<main class="layout">
+  <div class="hero">
+    <h1>150 Prompts para Arquitetos e Engenheiros</h1>
+    <p>Biblioteca completa organizada por área de atuação. Clique em qualquer prompt para ver o texto completo e copiar com um clique.</p>
+    <div class="stats-row">
+      <div class="stat-pill"><strong>150</strong> prompts</div>
+      <div class="stat-pill"><strong>10</strong> categorias</div>
+      <div class="stat-pill"><strong>7</strong> IAs suportadas</div>
+      <div class="stat-pill">✦ Projetos · Marketing · Renders · Contratos · Financeiro</div>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-label">Filtrar por categoria</div>
+    <div class="cat-filter" id="catFilter"></div>
+  </div>
+
+  <div class="ai-legend" id="aiLegend"></div>
+
+  <div class="prompts-list" id="promptsList"></div>
+  <div class="pagination" id="pagination"></div>
+</main>
+
+<footer class="site-footer">
+  150 Prompts para Arquitetos e Engenheiros &mdash; Use com ChatGPT, Claude, Gemini, Midjourney e outros
+</footer>
+
+<script>
+const CAT_COLORS = {
+  "Projetos":    { bg: "#e8f1fb", text: "#0c447c", border: "#b5d4f4" },
+  "Marketing":   { bg: "#eaf3de", text: "#27500A", border: "#C0DD97" },
+  "Renderização":{ bg: "#faeeda", text: "#633806", border: "#FAC775" },
+  "Contratos":   { bg: "#EEEDFE", text: "#3C3489", border: "#CECBF6" },
+  "Financeiro":  { bg: "#E1F5EE", text: "#085041", border: "#9FE1CB" },
+  "Fornecedores":{ bg: "#FAECE7", text: "#712B13", border: "#F5C4B3" },
+  "Organização": { bg: "#FBEAF0", text: "#4B1528", border: "#F4C0D1" },
+  "Atendimento": { bg: "#E6F1FB", text: "#042C53", border: "#85B7EB" },
+  "RH & Equipe": { bg: "#F1EFE8", text: "#2C2C2A", border: "#D3D1C7" },
+  "Captação":    { bg: "#FCEBEB", text: "#501313", border: "#F7C1C1" },
+};
+
+const AI = {
+  chatgpt:    { label:"ChatGPT",    color:"#10A37F", bg:"#e6f7f2", border:"#9FE1CB",
+    svg:`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M22.28 9.29a5.85 5.85 0 0 0-.52-4.8 6.14 6.14 0 0 0-6.6-2.91A5.9 5.9 0 0 0 10.72 0a6.14 6.14 0 0 0-5.86 4.24 5.87 5.87 0 0 0-3.92 2.84 6.15 6.15 0 0 0 .76 7.19 5.85 5.85 0 0 0 .52 4.8 6.14 6.14 0 0 0 6.6 2.91A5.9 5.9 0 0 0 13.28 24a6.14 6.14 0 0 0 5.86-4.25 5.87 5.87 0 0 0 3.92-2.84 6.14 6.14 0 0 0-.78-7.62zM13.28 22.5a4.64 4.64 0 0 1-2.97-1.07l.15-.08 4.92-2.84a.82.82 0 0 0 .41-.71v-6.93l2.08 1.2a.08.08 0 0 1 .04.06v5.74a4.67 4.67 0 0 1-4.63 4.63zm-9.96-4.27a4.63 4.63 0 0 1-.55-3.11l.14.09 4.92 2.84a.8.8 0 0 0 .82 0l6.01-3.47v2.4a.07.07 0 0 1-.03.06L9.63 20.3a4.67 4.67 0 0 1-6.31-2.07zm-1.27-10.8a4.63 4.63 0 0 1 2.42-2.03v5.84a.8.8 0 0 0 .4.7l5.99 3.46-2.08 1.2a.07.07 0 0 1-.07 0L4.3 13.37a4.67 4.67 0 0 1-.25-6.04zm17.1 4.01L13.14 8l2.07-1.2a.07.07 0 0 1 .07 0l5.41 3.13a4.66 4.66 0 0 1-.72 8.41V12.5a.8.8 0 0 0-.42-.71zm2.07-3.13l-.14-.09-4.91-2.86a.8.8 0 0 0-.82 0L9.34 9.93V7.53a.07.07 0 0 1 .03-.06l5.41-3.12a4.67 4.67 0 0 1 6.44 4.96zm-13.01 4.27-2.08-1.2a.08.08 0 0 1-.04-.06V5.58a4.67 4.67 0 0 1 7.66-3.57l-.15.08-4.92 2.84a.82.82 0 0 0-.41.71zm1.13-2.43 2.67-1.54 2.67 1.54v3.08l-2.67 1.54-2.67-1.54z"/></svg>` },
+  gemini:     { label:"Gemini",     color:"#4285F4", bg:"#e8f0fe", border:"#b5d4f4",
+    svg:`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c1.93 0 3.73.578 5.23 1.57L3.57 17.23A9.976 9.976 0 0 1 2 12C2 6.477 6.477 2 12 2zm0 20c-1.93 0-3.73-.578-5.23-1.57L20.43 6.77A9.976 9.976 0 0 1 22 12c0 5.523-4.477 10-10 10z"/></svg>` },
+  claude:     { label:"Claude",     color:"#D97757", bg:"#fdf0eb", border:"#F5C4B3",
+    svg:`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-1.285-.073L1 12.417l.303-.89.959.097 1.189.097 2.146.17 2.984.218h.875l-.048-.097-1.478-2.478-1.916-3.15L4.9 4.944l-.427-1.089L5.24 3l.784.292.232.456 1.331 2.813 1.818 3.682.693 1.478.134-.268.972-2.54 1.224-3.018.665-1.962.561-1.236.389-.146.93.535-.06.401-.487 1.016-.608 1.892-1.016 3.03-.79 2.091.128.012 3.282-1.747 2.722-1.564.79-.401 1.346-.012.487.754-.242.546-.851.462-2.722 1.467-2.37 1.295-.097.073.097.134 2.552.413 3.03.559 1.99.437.081.523-.456.607-1.113-.134-3.3-.632-2.504-.462h-.17l.097.243 1.564 2.697 1.747 2.965.559 1.188-.146.561-.717.37-.462-.316-1.564-3.03-1.527-2.965-.34-.693-.073.073-.443 3.604-.383 2.405-.267 1.041-.607.194-.729-.456.012-.34.698-2.965.668-3.823v-.17l-.146.073-3.42 1.916-2.722 1.43-1.188.51h-.024z"/></svg>` },
+  grok:       { label:"Grok",       color:"#1a1a1a", bg:"#f0f0f0", border:"#ccc",
+    svg:`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>` },
+  midjourney: { label:"Midjourney", color:"#444", bg:"#f5f5f5", border:"#ccc",
+    svg:`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 2L2 5.5l8 13 2-3.5L3.5 2zm17 0L12 15l2 3.5 8-13L20.5 2zM12 17l-2 3h4l-2-3z"/></svg>` },
+  dalle:      { label:"DALL-E",     color:"#10A37F", bg:"#e6f7f2", border:"#9FE1CB",
+    svg:`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 0 1 8 0" fill="none" stroke="white" stroke-width="1.5"/><circle cx="9" cy="10" r="1" fill="white"/><circle cx="15" cy="10" r="1" fill="white"/></svg>` },
+  ideogram:   { label:"Ideogram",   color:"#7C3AED", bg:"#f3eefe", border:"#CECBF6",
+    svg:`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="9" height="9" rx="2"/><rect x="13" y="2" width="9" height="9" rx="2"/><rect x="2" y="13" width="9" height="9" rx="2"/><rect x="13" y="13" width="9" height="9" rx="2"/></svg>` },
+  firefly:    { label:"Firefly",    color:"#FF3366", bg:"#fff0f3", border:"#F4C0D1",
+    svg:`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>` },
+};
+
+const AI_TEXT  = ["chatgpt","gemini","claude","grok"];
+const AI_IMAGE = ["midjourney","dalle","ideogram","firefly"];
+const AI_ALL   = [...AI_TEXT];
+
+const CATS = ["Projetos","Marketing","Renderização","Contratos","Financeiro","Fornecedores","Organização","Atendimento","RH & Equipe","Captação"];
+
+const PROMPTS = [
+  {n:1,cat:"Projetos",ai:AI_ALL,title:"Briefing de projeto residencial",prompt:`Atue como consultor de projetos arquitetônicos. Preciso criar um briefing completo para um projeto residencial unifamiliar.
+
+O cliente informou:
+- Família: [descreva composição familiar]
+- Terreno: [dimensões e localização]
+- Orçamento estimado: [valor]
+- Estilo desejado: [descreva]
+
+Gere um documento de briefing estruturado com: programa de necessidades, levantamento de hábitos, prioridades de projeto, restrições legais que devo verificar, e lista de perguntas complementares que devo fazer ao cliente.`},
+  {n:2,cat:"Projetos",ai:AI_ALL,title:"Memorial descritivo automático",prompt:`Você é um arquiteto sênior. Escreva um memorial descritivo técnico completo para um projeto de [tipo de edificação] com as seguintes características:
+
+- Área construída: [m²]
+- Número de pavimentos: [n]
+- Sistema construtivo: [descreva]
+- Acabamentos principais: [liste]
+- Normas aplicáveis: [liste ou peça para sugerir]
+
+O memorial deve incluir: objeto, justificativa, descrição arquitetônica por ambiente, especificações técnicas, sistemas prediais previstos e observações finais.`},
+  {n:3,cat:"Projetos",ai:AI_ALL,title:"Checklist de aprovação municipal",prompt:`Liste todos os documentos, projetos complementares, laudos e certidões necessários para aprovação de um projeto de [tipo: residencial/comercial/industrial] no município de [cidade/estado], conforme legislação vigente. Organize por etapa (consulta prévia, protocolo, aprovação, habite-se) e indique os responsáveis técnicos necessários para cada documento.`},
+  {n:4,cat:"Projetos",ai:AI_ALL,title:"Revisão crítica de partido arquitetônico",prompt:`Analise criticamente o partido arquitetônico descrito abaixo e aponte pontos fortes, inconsistências, riscos técnicos e oportunidades de melhoria:
+
+[Descreva o partido: orientação, volumetria, fluxos, conceito, implantação]
+
+Considere: conforto ambiental, funcionalidade, viabilidade construtiva, custo-benefício e impacto urbano.`},
+  {n:5,cat:"Projetos",ai:AI_ALL,title:"Compatibilização de projetos",prompt:`Atue como coordenador de projetos. Crie um protocolo de compatibilização entre os projetos de arquitetura, estrutura, hidrossanitário, elétrico e HVAC para uma obra de [descreva]. Inclua: matriz de responsabilidades, pontos críticos de interferência em cada especialidade, frequência de reuniões, formato de entrega e checklist final de compatibilização.`},
+  {n:6,cat:"Projetos",ai:AI_ALL,title:"Estudo de viabilidade construtiva",prompt:`Realize um estudo de viabilidade técnica e financeira preliminar para construção de [descreva empreendimento] no terreno com as seguintes características: [área, testada, topografia, zoneamento]. Analise: potencial construtivo, restrições legais, custo estimado por m², prazo de obra, e retorno estimado se for para venda ou locação.`},
+  {n:7,cat:"Projetos",ai:AI_ALL,title:"Programa de necessidades corporativo",prompt:`Desenvolva um programa de necessidades completo para escritório corporativo de uma empresa de [setor] com [n] funcionários. Inclua: setores necessários, dimensionamento por setor, inter-relações funcionais, requisitos especiais de cada área, estimativa de área total e recomendações de layout.`},
+  {n:8,cat:"Projetos",ai:AI_ALL,title:"Revisão de normas aplicáveis",prompt:`Liste todas as normas ABNT, legislações municipais, estaduais e federais aplicáveis a um projeto de [tipo de edificação e uso]. Organize por: estrutura, instalações, acessibilidade, segurança contra incêndio, conforto ambiental e uso e ocupação do solo. Indique quais são mandatórias e quais são recomendadas.`},
+  {n:9,cat:"Projetos",ai:AI_ALL,title:"Cronograma de projeto por fases",prompt:`Crie um cronograma detalhado de projeto para [tipo de edificação, área aproximada]. Organize em fases: levantamento e briefing, estudo preliminar, anteprojeto, projeto legal, projeto executivo e compatibilização. Estime horas por fase, marcos de entrega e dependências entre etapas.`},
+  {n:10,cat:"Projetos",ai:AI_ALL,title:"Análise de conforto térmico e lumínico",prompt:`Analise o potencial de conforto térmico e lumínico natural para um projeto localizado em [cidade], com as seguintes orientações de fachada: [norte, sul, leste, oeste]. Sugira estratégias passivas de ventilação, proteção solar, captação de luz natural e sombreamento, baseadas na zona bioclimática local (NBR 15220).`},
+  {n:11,cat:"Projetos",ai:AI_ALL,title:"Documentação as-built",prompt:`Crie um roteiro completo para levantamento e documentação as-built de um edifício existente de [tipo e idade]. Liste: equipamentos necessários, metodologia de levantamento, documentos a coletar, formato de entrega, e protocolo para identificação de divergências entre projeto original e obra executada.`},
+  {n:12,cat:"Projetos",ai:AI_ALL,title:"Especificação de materiais por ambiente",prompt:`Para o projeto de [tipo de edificação], especifique materiais e acabamentos recomendados para cada ambiente listado abaixo, com foco em durabilidade, manutenção, custo e estética. Para cada material indique: marca/referência, norma aplicável, e cuidados de execução.
+
+Ambientes: [liste os ambientes]`},
+  {n:13,cat:"Projetos",ai:AI_ALL,title:"Laudo de vistoria técnica",prompt:`Elabore um modelo de laudo de vistoria técnica para [tipo de edificação], a ser utilizado em [finalidade: compra e venda, perícia, locação, reforma]. O laudo deve incluir: identificação do imóvel, metodologia, sistemas avaliados (estrutura, vedações, coberturas, instalações, acabamentos), registro de anomalias com classificação por gravidade, e recomendações.`},
+  {n:14,cat:"Projetos",ai:AI_ALL,title:"Projeto de reforma com restrições",prompt:`Estou projetando uma reforma em [tipo de imóvel, época de construção]. As principais restrições são: [liste: tombamento, condomínio, estrutura existente, etc.].
+
+Sugira soluções criativas para: [descreva o objetivo da reforma] respeitando todas as restrições, com alternativas de custo baixo, médio e alto.`},
+  {n:15,cat:"Projetos",ai:AI_ALL,title:"Detalhamento construtivo crítico",prompt:`Descreva tecnicamente o detalhamento construtivo correto para [elemento: junta de dilatação / impermeabilização de laje / encontro de materiais diferentes / etc.], incluindo: materiais especificados com referências normativas, sequência executiva passo a passo, erros comuns a evitar e controle de qualidade na execução.`},
+  {n:16,cat:"Projetos",ai:AI_ALL,title:"Relatório de progresso de obra",prompt:`Gere um modelo de relatório semanal/quinzenal de progresso de obra para [tipo de edificação]. O relatório deve conter: resumo executivo, percentual de avanço físico-financeiro por frente de serviço, registro de ocorrências, fotos indexadas por local, próximos passos e pendências. Adapte para ser preenchido por engenheiro residente.`},
+  {n:17,cat:"Projetos",ai:AI_ALL,title:"Análise de patologias construtivas",prompt:`Analise as seguintes manifestações patológicas identificadas em [tipo de edificação, idade aproximada]: [descreva: fissuras, infiltrações, eflorescências, etc.]. Para cada manifestação, indique: provável causa, gravidade (crítica/séria/moderada/alerta), método de diagnóstico complementar recomendado, e proposta de intervenção com especificação técnica.`},
+  {n:18,cat:"Projetos",ai:AI_ALL,title:"Projeto sustentável — LEED/AQUA",prompt:`Quero certificar o projeto de [tipo de edificação] pelo [LEED / AQUA-HQE / Procel Edifica]. Liste as estratégias de projeto mais custo-efetivas para atingir a certificação, organizadas por categoria (energia, água, materiais, qualidade do ar interno, entorno). Indique pontos/créditos obtidos e custo incremental estimado por estratégia.`},
+  {n:19,cat:"Projetos",ai:AI_ALL,title:"Escopo técnico de contratação de projetos",prompt:`Elabore o escopo técnico detalhado para contratação do projeto [hidrossanitário / estrutural / elétrico / SPDA / HVAC] de um [tipo de edificação, área, número de pavimentos]. O escopo deve definir: fases de entrega, conteúdo mínimo de cada fase, normas de referência, formato de arquivos, e critérios de aceitação.`},
+  {n:20,cat:"Projetos",ai:AI_ALL,title:"Estimativa de custos por CUB",prompt:`Realize uma estimativa paramétrica de custo de construção para [tipo de edificação] com área de [m²] e padrão [baixo/normal/alto/luxo], utilizando o CUB [estado] do mês atual. Detalhe: custo total estimado, custo por m², parcelas do CUB aplicáveis, fatores de correção necessários e margem de incerteza da estimativa.`},
+  {n:21,cat:"Projetos",ai:AI_ALL,title:"Gestão de interferências em reforma",prompt:`Estou coordenando uma reforma em ambiente ocupado [hospital / escritório / escola]. Como planejar as fases de execução para minimizar interferências na operação? Crie: cronograma de fases, critérios de isolamento de áreas, comunicação com usuários, medidas de segurança e plano de contingência.`},
+  {n:22,cat:"Projetos",ai:AI_ALL,title:"Requisitos de acessibilidade universal",prompt:`Liste todos os requisitos da NBR 9050 aplicáveis ao projeto de [tipo de edificação e uso]. Organize por área: acessos e entradas, circulação horizontal e vertical, sanitários, estacionamentos, e sinalização. Para cada item, indique a dimensão mínima, tolerância e solução recomendada.`},
+  {n:23,cat:"Projetos",ai:AI_ALL,title:"Análise de potencial construtivo",prompt:`Analise o potencial construtivo do terreno com as seguintes características: área [m²], testada [m], localização [bairro/cidade], zoneamento [indicar]. Calcule: taxa de ocupação máxima, coeficiente de aproveitamento, recuos obrigatórios, gabarito máximo, área construível total e alternativas de implantação.`},
+  {n:24,cat:"Projetos",ai:AI_ALL,title:"Especificação de impermeabilização",prompt:`Elabore a especificação completa de impermeabilização para [tipo: laje de cobertura / banheiro / piscina / subsolo / terraço]. Inclua: sistema recomendado com marca de referência, norma ABNT aplicável, preparo de substrato, sequência executiva, pontos críticos, proteção mecânica e prazo de garantia mínimo exigido.`},
+
+  // MARKETING
+  {n:25,cat:"Marketing",ai:AI_ALL,title:"Bio profissional para redes sociais",prompt:`Escreva uma bio profissional impactante para [arquiteto/engenheiro] especializado em [nicho] para uso em Instagram, LinkedIn e site. Destaque: diferencial, especialidade, localização e call to action. Gere 3 versões: curta (100 caracteres), média (200 caracteres) e longa (500 caracteres).`},
+  {n:26,cat:"Marketing",ai:AI_ALL,title:"Roteiro de case para Instagram",prompt:`Crie o roteiro completo de um carrossel para Instagram apresentando o case do projeto [descreva brevemente]. O carrossel deve ter 8-10 slides e conter: slide de capa impactante, desafio do cliente, conceito do projeto, processo criativo, solução apresentada, resultado final, depoimento do cliente e CTA. Escreva o texto de cada slide (máx. 3 linhas) e a legenda completa com hashtags.`},
+  {n:27,cat:"Marketing",ai:AI_ALL,title:"Proposta de valor diferenciada",prompt:`Me ajude a definir e comunicar minha proposta de valor como [arquiteto/engenheiro] especializado em [nicho]. Meu perfil: [experiência, projetos realizados, diferenciais percebidos]. Crie: declaração de posicionamento de 1 frase, 3 pilares de valor com argumentos, e como comunicar isso em diferentes contextos (redes sociais, conversa com cliente, site).`},
+  {n:28,cat:"Marketing",ai:AI_ALL,title:"E-mail de nutrição para leads",prompt:`Crie uma sequência de 5 e-mails de nutrição para leads que baixaram meu material sobre [tema]. Cada e-mail deve ter: linha de assunto irresistível, conteúdo de valor relacionado a [nicho], soft CTA para o próximo passo. Tom: consultivo, especialista, sem ser vendedor.`},
+  {n:29,cat:"Marketing",ai:AI_ALL,title:"Roteiro de vídeo de autoridade",prompt:`Crie o roteiro completo de um vídeo de 3-5 minutos para YouTube/Reels sobre [tema técnico acessível]. Estrutura: gancho (15s), contexto do problema (30s), desenvolvimento em 3 pontos práticos, dica extra exclusiva, CTA. Tom educativo e acessível para leigos.`},
+  {n:30,cat:"Marketing",ai:AI_ALL,title:"Google Meu Negócio — descrição otimizada",prompt:`Escreva uma descrição otimizada para o Google Meu Negócio de um escritório de [arquitetura/engenharia] especializado em [nicho], localizado em [cidade]. A descrição deve: ter 700-750 caracteres, incluir palavras-chave relevantes naturalmente, comunicar diferenciais, e ter chamada para ação. Gere também 10 palavras-chave para as tags do perfil.`},
+  {n:31,cat:"Marketing",ai:AI_ALL,title:"Estratégia de conteúdo mensal",prompt:`Crie um calendário editorial de 30 dias para um escritório de [arquitetura/engenharia] com foco em [nicho]. Para cada post sugira: tema, formato (foto, carrossel, reels, stories), legenda resumida, hashtags e melhor horário de publicação. Distribua entre: conteúdo educativo (40%), bastidores/processo (30%), cases/portfólio (20%) e depoimentos (10%).`},
+  {n:32,cat:"Marketing",ai:AI_ALL,title:"Script de depoimento em vídeo",prompt:`Crie um roteiro de perguntas para coletar depoimento em vídeo de um cliente satisfeito com o projeto de [tipo]. As perguntas devem extrair naturalmente: situação antes, desafios enfrentados, experiência com o escritório, resultado entregue e impacto na vida/negócio. Inclua orientações de como conduzir a entrevista e dicas de edição.`},
+  {n:33,cat:"Marketing",ai:AI_ALL,title:"Apresentação de portfólio para cliente",prompt:`Estruture uma apresentação de portfólio em PDF/slides para apresentar a um cliente prospecto interessado em [tipo de projeto]. Deve conter: capa com posicionamento, quem somos, metodologia de trabalho, 3-5 cases com antes/depois e resultados, depoimentos, processo de contratação e próximos passos.`},
+  {n:34,cat:"Marketing",ai:AI_ALL,title:"Artigo de blog para SEO",prompt:`Escreva um artigo completo para blog/site sobre "[título sugerido]" focado em clientes que buscam [serviço] em [cidade/região]. O artigo deve ter: 1200-1500 palavras, linguagem acessível mas técnica, subtítulos estratégicos com palavras-chave, dicas práticas numeradas, e CTA ao final. Inclua sugestão de meta description.`},
+  {n:35,cat:"Marketing",ai:AI_ALL,title:"Respostas para objeções de clientes",prompt:`Liste as 10 principais objeções que clientes apresentam ao contratar um escritório de arquitetura/engenharia e escreva respostas persuasivas e empáticas para cada uma. Objeções comuns: "está caro", "preciso pensar", "vou só fazer a planta", "meu cunhado faz mais barato", "não sei se preciso de arquiteto". Tom: confiante, consultivo, sem pressão.`},
+  {n:36,cat:"Marketing",ai:AI_ALL,title:"Script de pitch consultivo",prompt:`Crie um script de pitch consultivo de 10 minutos para reunião com cliente prospecto interessado em [tipo de projeto]. Inclua: abertura (rapport e agenda), perguntas de descoberta, apresentação de valor, cases relevantes, tratamento de objeções e fechamento. Tom: consultor especialista, não vendedor.`},
+  {n:37,cat:"Marketing",ai:AI_ALL,title:"Estratégia de antes e depois",prompt:`Crie uma estratégia de conteúdo "antes e depois" para apresentar os resultados dos projetos. Defina: como fotografar corretamente os ambientes antes da reforma, ângulos a reproduzir no after, formato de apresentação (carrossel / vídeo / post único), legenda padrão que conte a história do projeto, e como usar esse conteúdo para captação.`},
+  {n:38,cat:"Marketing",ai:AI_ALL,title:"Roteiro de Reels de processo criativo",prompt:`Crie o roteiro de um Reels de 30-60 segundos mostrando o processo criativo do projeto [tipo], do briefing ao resultado final. Defina: sequência de cenas, duração de cada cena, sugestão de trilha, texto de tela em cada momento, e legenda com hashtags para alcance máximo. Tom: inspirador, autêntico, com personalidade do escritório.`},
+
+  // RENDERIZAÇÃO
+  {n:39,cat:"Renderização",ai:AI_IMAGE,title:"Render diurno fotorrealista — fachada",prompt:`Render this image as a true-to-life architectural photograph preserving all materials, textures, and finishes exactly as shown in the reference. Ultra-realistic 4K quality, captured as if by a professional architectural photographer using a high-end DSLR camera.
+
+Scene: daytime, bright blue sky with natural sunlight, well-defined shadows according to sun position, golden-hour or mid-morning atmosphere.
+
+Horizon: add a subtle tropical landscaping backdrop — lush but restrained, with a few modern Brazilian condominium houses visible in the distance to preserve the composition, framing, and horizon lines of the original reference image.
+
+CRITICAL: do not alter, modify, redesign, or reinterpret any element of the reference image. Preserve 100% of the architecture: geometry, volumes, openings, materials, proportions, and perspective angle exactly as provided.`},
+
+  {n:40,cat:"Renderização",ai:AI_IMAGE,title:"Render noturno / blue hour — fachada",prompt:`Render this image as a true-to-life architectural photograph preserving all materials, textures, and finishes exactly as shown in the reference. Ultra-realistic 4K quality, captured as if by a professional architectural photographer using a high-end DSLR camera.
+
+Scene: blue hour / dusk atmosphere — deep blue sky still lit, transitioning to night. Add warm white artificial lighting (3000K) on the vegetation, pathways, and architectural elements of the house. Interior lights on, glowing warmly through openings.
+
+Horizon: add a subtle tropical landscaping backdrop — lush but restrained, with a few modern Brazilian condominium houses visible in the distance to preserve the composition, framing, and horizon lines of the original reference image.
+
+CRITICAL: do not alter, modify, redesign, or reinterpret any element of the reference image. Preserve 100% of the architecture: geometry, volumes, openings, materials, proportions, and perspective angle exactly as provided.`},
+
+  {n:41,cat:"Renderização",ai:AI_IMAGE,title:"Planta humanizada — vista aérea",prompt:`Top view (bird's-eye view) of a humanized architectural floor plan, based exactly on the provided image. Transform into a hyper-realistic aerial photograph while preserving 100% of the original geometry, layout, dimensions, proportions, positions, and elements — with absolutely no design changes.
+
+Apply realistic materials and finishes with high-resolution textures, strictly faithful to the materials visible in the original image. Render the top faces of all walls in solid black, with clean and precise edges, technical and professional appearance. Add human figures, furniture shadows, plants, rugs, and life elements to humanize the spaces naturally.
+
+Natural daytime lighting with realistic sunlight, soft and coherent shadows according to sun position, balanced contrast, natural colors, and professional photographic realism.
+
+Negative prompt: do not change the floor plan layout, do not modify geometry, dimensions, proportions, or measurements, no structural changes, no added or removed rooms, no changes in walls, doors, windows, or openings positions, no furniture rearrangement, no redesign, no reinterpretation, no artistic alterations, no scale changes, no rotation, no mirroring, no cropping, no perspective distortion, no camera angle change, no color shift, no material mismatch, no exaggerated shadows, no dramatic lighting, no night lighting, no text, no annotations, no logos, no watermark.`},
+
+  {n:42,cat:"Renderização",ai:AI_IMAGE,title:"Moodboard de conceito de projeto",prompt:`Create a professional architectural moodboard based on the following design concept:
+
+Style: [descreva: contemporary / minimalist / tropical / industrial / etc.]
+Color palette: [primary colors and materials]
+Key materials: [stone, wood, concrete, glass, etc.]
+Atmosphere: [warm, serene, bold, luxurious, etc.]
+Reference spaces: [living room, facade, landscape, etc.]
+
+Compose a clean, editorial-style collage with: material swatches, textures, furniture references, lighting mood, exterior and interior views, and color palette strip. Layout: balanced, professional, suitable for client presentation. High resolution, no text overlays, no watermarks.`},
+
+  {n:43,cat:"Renderização",ai:AI_IMAGE,title:"Render de ambiente interno — sala/living",prompt:`Ultra-realistic 4K architectural interior render of a [sala de estar / cozinha / suíte principal] based on the provided reference. Photographic quality as captured by a professional interior photographer.
+
+Materials: [liste os materiais: mármore, madeira, cimento queimado, etc.]
+Lighting: natural daylight from [left/right/front], supplemented by warm artificial lighting (3000K pendants and recessed)
+Atmosphere: [aconchegante / minimalista / luxuoso]
+Camera angle: eye-level perspective, slightly wide, showcasing the full space.
+
+CRITICAL: preserve all proportions, furniture placement, and spatial layout from the reference image. No design changes, no added or removed elements.`},
+
+  {n:44,cat:"Renderização",ai:AI_IMAGE,title:"Render de fachada comercial",prompt:`Hyper-realistic 4K architectural render of a commercial facade [tipo: loja / restaurante / clínica / escritório], based exactly on the provided reference image.
+
+Scene: daytime, overcast soft light (cloudy sky, no harsh shadows) for maximum material clarity. Show street-level human scale with 2-3 people walking naturally nearby. Subtle urban context: sidewalk, trees, and adjacent buildings in soft focus.
+
+Materials: render exactly as specified — [liste: ACM, vidro, concreto aparente, etc.]
+
+CRITICAL: no geometry changes, no volumetric alterations, no added or removed openings. Exact proportion and perspective preservation.`},
+
+  {n:45,cat:"Renderização",ai:AI_IMAGE,title:"Variação de paleta de acabamentos",prompt:`Based on the provided architectural render, generate 3 alternative finish palette variations for the same project, preserving all geometry, proportions, and spatial layout unchanged.
+
+Variation 1 — [warm palette: wood tones, warm stone, beige plaster]
+Variation 2 — [cool minimalist: white, light grey concrete, dark metal frames]
+Variation 3 — [bold / luxurious: dark wood, black marble, brass details]
+
+Each variation must show the same camera angle, same lighting setup, and same composition as the original.`},
+
+  {n:46,cat:"Renderização",ai:AI_ALL,title:"Briefing para visualizador 3D",prompt:`Gere um briefing detalhado para instruir um visualizador 3D a criar renders fotorrealistas do projeto [descreva ambiente]. Inclua: horário de iluminação desejado, atmosfera pretendida, materiais principais, posicionamento de câmera e enquadramento, elementos de cena (pessoas, vegetação, mobiliário), referências de estilo visual e prazo de entrega.`},
+  {n:47,cat:"Renderização",ai:AI_ALL,title:"Especificações de materiais para 3D",prompt:`Crie uma tabela de especificações de materiais para configuração no [software: 3ds Max/Sketchup/Revit/Lumion/Enscape] para o projeto [descreva]. Para cada material liste: textura base, escala de aplicação, reflexo/roughness, normal map necessário, e equivalente de biblioteca disponível no software.`},
+  {n:48,cat:"Renderização",ai:AI_ALL,title:"Roteiro de animação arquitetônica",prompt:`Crie o roteiro de câmera para um vídeo de animação arquitetônica de 2 minutos do projeto [descreva]. Para cada sequência defina: tipo de movimento (traveling, drone, walk-through), duração, velocidade, trilha sonora sugerida, efeitos de iluminação, e momentos de pausa em vistas estratégicas. Formato: tabela de cenas com timecode.`},
+  {n:49,cat:"Renderização",ai:AI_ALL,title:"Checklist de entrega de visualização 3D",prompt:`Crie um checklist completo de qualidade para revisão e entrega de imagens de renderização arquitetônica. Organizado em: composição e enquadramento, qualidade de materiais e texturas, iluminação natural e artificial, elementos de ambientação, resolução e formato de arquivo, nomenclatura de arquivos e organização de pasta de entrega.`},
+
+  // CONTRATOS
+  {n:50,cat:"Contratos",ai:AI_ALL,title:"Escopo de contrato de projeto",prompt:`Elabore o escopo detalhado para contrato de prestação de serviços de projeto arquitetônico completo de [tipo de edificação, área, localização]. O escopo deve descrever: serviços incluídos por fase (EP, AP, PL, PE), serviços excluídos, entregas previstas, responsabilidades do cliente, e condições para revisões e retrabalhos.`},
+  {n:51,cat:"Contratos",ai:AI_ALL,title:"Cláusulas de proteção do profissional",prompt:`Liste e redija as cláusulas contratuais essenciais para proteger o arquiteto/engenheiro em contratos de prestação de serviços, cobrindo: limitação de responsabilidade, direitos autorais do projeto, condições de rescisão, propriedade intelectual, restrições de uso dos projetos pelo cliente, confidencialidade e foro de eleição.`},
+  {n:52,cat:"Contratos",ai:AI_ALL,title:"Adendo por mudança de escopo",prompt:`Redija um adendo contratual para formalizar mudança de escopo solicitada pelo cliente em [fase do projeto]. As mudanças são: [descreva]. O adendo deve contemplar: descrição das novas demandas, impacto no prazo, valor adicional, forma de pagamento, e confirmação de que o contrato original permanece vigente nos demais pontos.`},
+  {n:53,cat:"Contratos",ai:AI_ALL,title:"Proposta técnica e comercial completa",prompt:`Elabore uma proposta técnica e comercial completa para o projeto de [descreva brevemente]. A proposta deve conter: apresentação do escritório, entendimento do escopo, metodologia de trabalho, cronograma de projeto, equipe envolvida, honorários por fase com condições de pagamento, condições gerais, validade e próximos passos.`},
+  {n:54,cat:"Contratos",ai:AI_ALL,title:"Planilha de honorários por etapa",prompt:`Crie uma planilha de honorários para projeto de [tipo] com [área] m², seguindo a tabela do [CAU/CREA/IAB] como referência. Distribua os honorários entre as fases: levantamento, estudo preliminar, anteprojeto, projeto legal, projeto executivo, coordenação e acompanhamento de obra. Indique percentual de cada fase e valor em R$.`},
+  {n:55,cat:"Contratos",ai:AI_ALL,title:"Termo de aprovação de etapa",prompt:`Redija um modelo de Termo de Aprovação de Etapa a ser assinado pelo cliente ao final de cada fase do projeto. Deve registrar: identificação do projeto e das partes, descrição dos documentos aprovados, declaração de aprovação (com ou sem ressalvas), data limite para revisões e autorização para início da próxima etapa.`},
+  {n:56,cat:"Contratos",ai:AI_ALL,title:"NDA — Acordo de confidencialidade",prompt:`Redija um Acordo de Confidencialidade (NDA) para ser assinado com [cliente / parceiro / fornecedor] antes de apresentar o projeto [descreva]. Inclua: definição de informações confidenciais, obrigações das partes, exceções, prazo de vigência, penalidades por descumprimento e foro.`},
+  {n:57,cat:"Contratos",ai:AI_ALL,title:"Rescisão contratual — comunicado formal",prompt:`Escreva uma comunicação formal de rescisão contratual pela seguinte razão: [inadimplência / mudança de escopo não formalizada / descumprimento de obrigações do cliente]. O comunicado deve ser formal, sem agressividade, registrar a situação, indicar os valores devidos e os documentos a serem devolvidos.`},
+  {n:58,cat:"Contratos",ai:AI_ALL,title:"Contrato de administração de obra",prompt:`Elabore as cláusulas principais de um contrato de administração de obra para [tipo de edificação]. Inclua: escopo de serviços de fiscalização, frequência de visitas, responsabilidades do profissional e do cliente, forma de remuneração, relatórios previstos, limitações de responsabilidade e condições de encerramento.`},
+  {n:59,cat:"Contratos",ai:AI_ALL,title:"Revisão de contrato recebido do cliente",prompt:`Analise criticamente o seguinte contrato que recebi de um cliente: [cole as cláusulas ou descreva os pontos principais]. Identifique: cláusulas abusivas ou desfavoráveis, ausências importantes, pontos ambíguos que podem gerar conflito, e sugira redações alternativas para cada ponto problemático.`},
+  {n:60,cat:"Contratos",ai:AI_ALL,title:"Cronograma de pagamentos",prompt:`Crie um cronograma de pagamentos otimizado para o contrato de projeto de [tipo e área], com honorários totais de R$ [valor]. Distribua os pagamentos vinculados às entregas de cada etapa de forma que proteja o profissional contra inadimplência, seja razoável para o cliente, e considere o fluxo de caixa do escritório.`},
+  {n:61,cat:"Contratos",ai:AI_ALL,title:"Contrato de projeto de interiores",prompt:`Elabore o escopo e cláusulas essenciais de um contrato de projeto de interiores para [tipo de ambiente]. Aborde: definição de projeto executivo de interiores, responsabilidade sobre especificação de produtos, acompanhamento de execução, fornecimento de itens pelo profissional ou pelo cliente, e proteção de direito autoral do conceito.`},
+  {n:62,cat:"Contratos",ai:AI_ALL,title:"ART/RRT integrada ao contrato",prompt:`Explique como integrar corretamente a ART (CREA) ou RRT (CAU) ao contrato de prestação de serviços de projeto. Inclua: momento adequado de emissão, como fazer referência cruzada no contrato, o que fazer em caso de aditivo de escopo, e como proceder em caso de rescisão para baixa da ART/RRT.`},
+
+  // FINANCEIRO
+  {n:63,cat:"Financeiro",ai:AI_ALL,title:"Precificação por valor entregue",prompt:`Me ajude a calcular o preço justo e lucrativo para o projeto de [tipo, área]. Meu custo hora é R$ [valor], equipe envolvida: [descreva]. Estime as horas por fase, calcule o custo total, aplique margem de lucro de [%] e compare com a tabela de honorários do CAU/IAB. Sugira como apresentar o preço ao cliente com base em valor entregue, não em horas.`},
+  {n:64,cat:"Financeiro",ai:AI_ALL,title:"DRE simplificado do escritório",prompt:`Crie um modelo de DRE simplificado para escritório de arquitetura/engenharia. Calcule: receita bruta, deduções, receita líquida, custos diretos, margem bruta, despesas operacionais, EBITDA e lucro líquido. Dados: faturamento médio mensal R$ [valor], principais custos: [liste]. Identifique pontos de atenção.`},
+  {n:65,cat:"Financeiro",ai:AI_ALL,title:"Análise do ponto de equilíbrio",prompt:`Calcule o ponto de equilíbrio financeiro do meu escritório. Dados: custos fixos mensais R$ [valor], custo variável médio por projeto [%] da receita, ticket médio de projeto R$ [valor]. Qual o faturamento mínimo mensal e quantos projetos por mês preciso para cobrir todos os custos?`},
+  {n:66,cat:"Financeiro",ai:AI_ALL,title:"Fluxo de caixa de obra",prompt:`Crie um modelo de fluxo de caixa para obra de [tipo, área, orçamento total] com previsão de [prazo] meses. Distribua os desembolsos por categoria ao longo do cronograma físico. Sinalize meses de maior desembolso e sugira estratégia de reserva de capital.`},
+  {n:67,cat:"Financeiro",ai:AI_ALL,title:"Planejamento tributário básico",prompt:`Explique as opções tributárias disponíveis para escritório de arquitetura/engenharia no Brasil com faturamento de R$ [valor] anual. Compare: MEI, Simples Nacional (Anexo III vs V), Lucro Presumido e Lucro Real. Para cada regime, indique: alíquota efetiva, obrigações acessórias, vantagens e quando compensa a migração.`},
+  {n:68,cat:"Financeiro",ai:AI_ALL,title:"Orçamento operacional anual",prompt:`Ajude-me a estruturar o orçamento operacional do escritório para o próximo ano. Categorias: pessoal, softwares, infraestrutura, marketing, capacitação, seguros profissionais, impostos e reserva de contingência. Com faturamento previsto de R$ [valor], calcule os percentuais ideais para cada categoria.`},
+  {n:69,cat:"Financeiro",ai:AI_ALL,title:"Cobrança de cliente inadimplente",prompt:`Escreva uma sequência de 3 comunicações para cobrança de honorários em atraso: 1) lembrete amigável (5 dias), 2) notificação formal (15 dias), 3) notificação pré-judicial (30 dias). Cada mensagem deve ser profissional, preservar o relacionamento quando possível, e incluir os dados do débito e prazo para regularização.`},
+  {n:70,cat:"Financeiro",ai:AI_ALL,title:"Custo hora real do profissional",prompt:`Calcule o custo hora real de um arquiteto/engenheiro: pró-labore R$ [valor], horas trabalhadas/mês [n], férias e 13º [provisionados/não], encargos [CLT/PJ], overhead do escritório R$ [valor/mês]. Qual o valor mínimo a cobrar por hora para não trabalhar no prejuízo?`},
+  {n:71,cat:"Financeiro",ai:AI_ALL,title:"Rentabilidade por projeto",prompt:`Crie um modelo para análise de rentabilidade de projetos. Para cada projeto, calcule: receita contratada, horas efetivamente utilizadas, custo hora da equipe, custo direto, margem bruta, desvio em relação ao orçado, e lições aprendidas para próximos projetos similares.`},
+  {n:72,cat:"Financeiro",ai:AI_ALL,title:"Gestão de recebíveis",prompt:`Crie um sistema simples de gestão de recebíveis para escritório com [n] projetos ativos. Inclua: controle com colunas essenciais, alertas de vencimento, dashboard de inadimplência, indicadores de prazo médio de recebimento e política de desconto por pagamento antecipado.`},
+  {n:73,cat:"Financeiro",ai:AI_ALL,title:"Relatório financeiro mensal",prompt:`Estruture um modelo de relatório financeiro mensal para escritório de arquitetura. Deve incluir: resumo executivo em 3 indicadores-chave, faturamento vs meta, custos realizados, margem líquida, projetos em andamento e faturamento previsto, e ações corretivas se necessário.`},
+  {n:74,cat:"Financeiro",ai:AI_ALL,title:"Precificação de consultoria avulsa",prompt:`Como precificar corretamente serviços avulsos: visita técnica, laudo de vistoria, consultoria de projeto, revisão de projeto de terceiro, assessoria na compra de imóvel? Calcule o preço para cada serviço considerando: tempo estimado, custo hora, deslocamento, responsabilidade técnica e mercado local.`},
+  {n:75,cat:"Financeiro",ai:AI_ALL,title:"Valuation do escritório",prompt:`Como calcular o valor do meu escritório de arquitetura para eventual venda, entrada de sócio ou captação de investimento? Explique os principais métodos de valuation aplicáveis (múltiplo de receita, múltiplo de EBITDA, fluxo de caixa descontado), quais ativos intangíveis considerar (carteira de clientes, marca, processos), e como preparar o negócio para aumentar seu valor.`},
+
+  // FORNECEDORES
+  {n:76,cat:"Fornecedores",ai:AI_ALL,title:"Carta de solicitação de orçamento",prompt:`Elabore um e-mail padrão para solicitação de orçamento de [material/serviço] para a obra de [tipo e local]. Inclua: identificação do projeto, especificação técnica, quantidade, prazo de entrega, condições de pagamento desejadas, critérios de avaliação e prazo para resposta.`},
+  {n:77,cat:"Fornecedores",ai:AI_ALL,title:"Comparativo de propostas",prompt:`Crie um modelo de planilha comparativa para analisar 3 propostas de fornecedores para [material/serviço]. Colunas: fornecedor, valor total, prazo, condições de pagamento, garantia, assistência técnica, referências, pontuação técnica e comercial. Inclua critérios de ponderação e recomendação final justificada.`},
+  {n:78,cat:"Fornecedores",ai:AI_ALL,title:"Ficha de homologação de fornecedor",prompt:`Crie um modelo de ficha de homologação de fornecedor para escritório/construtora. Avalie: documentação legal, capacidade técnica, referências de projetos, qualidade dos produtos/serviços, prazo e confiabilidade, condições comerciais e suporte pós-venda. Sistema de pontuação incluído.`},
+  {n:79,cat:"Fornecedores",ai:AI_ALL,title:"Negociação de condições comerciais",prompt:`Prepare argumentos e estratégia para negociar melhores condições com o fornecedor [tipo] para a obra de [descreva]. Minha posição: [volume de compra, frequência, pagamento]. Elabore um roteiro de negociação com BATNA (alternativa mínima aceitável).`},
+  {n:80,cat:"Fornecedores",ai:AI_ALL,title:"Especificação técnica para compra",prompt:`Elabore a especificação técnica completa para aquisição de [produto] para o projeto [descreva]. Deve conter: descrição técnica, normas ABNT aplicáveis, dimensões e tolerâncias, acabamento e cor, requisitos de desempenho, documentação exigida e critérios de aceitação no recebimento.`},
+  {n:81,cat:"Fornecedores",ai:AI_ALL,title:"Controle de entrega de materiais",prompt:`Crie um protocolo de recebimento e controle de materiais em obra. Inclua: checklist de conferência, modelo de nota de recebimento, procedimento para materiais não conformes, armazenagem correta por tipo de material e rastreabilidade no diário de obra.`},
+  {n:82,cat:"Fornecedores",ai:AI_ALL,title:"Carta de reclamação técnica",prompt:`Redija uma carta técnica formal para registrar reclamação junto ao fornecedor referente ao produto [descreva] fornecido para a obra [nome]. A carta deve: descrever o defeito com precisão técnica, indicar a norma descumprida, documentar o prejuízo, solicitar solução e estabelecer prazo para resposta.`},
+  {n:83,cat:"Fornecedores",ai:AI_ALL,title:"Banco de fornecedores por categoria",prompt:`Me ajude a estruturar um banco de dados de fornecedores para escritório de arquitetura. Defina as categorias necessárias, campos de cadastro essenciais, sistema de classificação e avaliação, frequência de atualização e como usar esse banco para agilizar especificação em novos projetos.`},
+  {n:84,cat:"Fornecedores",ai:AI_ALL,title:"Avaliação pós-obra de fornecedores",prompt:`Crie um modelo de avaliação pós-obra de fornecedores. Avalie: cumprimento de prazo, qualidade do produto/serviço, suporte técnico, relacionamento comercial, e relação custo-benefício. O modelo deve gerar nota final e classificação (aprovado / aprovado com ressalvas / reprovado).`},
+
+  // ORGANIZAÇÃO
+  {n:85,cat:"Organização",ai:AI_ALL,title:"Estrutura de pastas para projetos",prompt:`Crie a estrutura ideal de pastas e nomenclatura de arquivos para organizar os projetos de um escritório de arquitetura. Considere: separação por cliente, projeto, fase e disciplina, versionamento, arquivamento de projetos concluídos e acessibilidade para equipe remota. Inclua exemplo prático de nomenclatura.`},
+  {n:86,cat:"Organização",ai:AI_ALL,title:"Onboarding de novo projeto",prompt:`Crie um checklist completo de onboarding para início de novo projeto. Inclua: abertura de pasta e código de projeto, briefing inicial, levantamento de documentação, verificação de viabilidade, abertura de contrato, emissão de ART/RRT, briefing da equipe, e definição de cronograma.`},
+  {n:87,cat:"Organização",ai:AI_ALL,title:"Modelo de ata de reunião",prompt:`Crie um modelo padrão de ata de reunião para escritório de arquitetura: reuniões de briefing, coordenação de equipe, obra e aprovação de projeto. A ata deve registrar: participantes, pauta, decisões tomadas, responsáveis e prazos de cada ação, e campo de aprovação.`},
+  {n:88,cat:"Organização",ai:AI_ALL,title:"Gestão de múltiplos projetos",prompt:`Me ajude a criar um sistema de gestão visual para controlar [n] projetos simultâneos em diferentes fases. Defina: ferramenta recomendada (Trello, Asana, Notion, planilha), estrutura de quadros/tarefas, indicadores de progresso, alertas de prazo, e rotina semanal de revisão.`},
+  {n:89,cat:"Organização",ai:AI_ALL,title:"Protocolo de comunicação com cliente",prompt:`Estabeleça um protocolo de comunicação padrão do escritório com clientes. Defina: canal oficial, tempo de resposta por tipo de mensagem, quando usar e-mail vs WhatsApp vs reunião, como documentar decisões verbais, frequência de relatórios, e como gerenciar solicitações fora do escopo.`},
+  {n:90,cat:"Organização",ai:AI_ALL,title:"Manual de processos do escritório",prompt:`Ajude-me a criar o índice e estrutura de um Manual de Processos para escritório de arquitetura com [n] pessoas. Deve cobrir: prospecção e venda, onboarding de projeto, gestão por fase, controle de qualidade, entrega e pós-venda, gestão financeira e RH.`},
+  {n:91,cat:"Organização",ai:AI_ALL,title:"Controle de revisões de projeto",prompt:`Crie um protocolo de controle de revisões para projetos de arquitetura. Defina: sistema de numeração, quem autoriza uma nova revisão, como registrar o motivo, como comunicar ao cliente, onde arquivar versões antigas, e como garantir que a equipe sempre trabalhe na versão correta.`},
+  {n:92,cat:"Organização",ai:AI_ALL,title:"Checklist de fechamento de projeto",prompt:`Crie um checklist completo de fechamento de projeto. Inclua: conferência de todas as entregas contratuais, baixa de ART/RRT, coleta de depoimento do cliente, arquivamento digital e físico, reunião de lições aprendidas, atualização do portfólio, e registro para case de marketing.`},
+  {n:93,cat:"Organização",ai:AI_ALL,title:"Rotina semanal do gestor",prompt:`Monte uma rotina semanal ideal para o arquiteto/engenheiro que também é gestor do escritório, equilibrando: gestão de projetos, prospecção e vendas, administrativo-financeiro, desenvolvimento da equipe, e criação de conteúdo. Como ter tempo estratégico sem ficar 100% operacional?`},
+  {n:94,cat:"Organização",ai:AI_ALL,title:"KPIs do escritório de arquitetura",prompt:`Defina os KPIs mais relevantes para gestão de um escritório de arquitetura com foco em [crescimento / qualidade / rentabilidade]. Para cada KPI, indique: o que mede, como calcular, meta sugerida, frequência de acompanhamento e ação corretiva. Limite a 10 indicadores essenciais.`},
+
+  // ATENDIMENTO
+  {n:95,cat:"Atendimento",ai:AI_ALL,title:"Roteiro de reunião de briefing",prompt:`Crie um roteiro completo para reunião de briefing inicial com cliente interessado em projeto de [tipo]. Deve conter: abertura e apresentação, perguntas para entender estilo de vida/negócio, necessidades funcionais, referências estéticas, orçamento e prazo, e encerramento com próximos passos.`},
+  {n:96,cat:"Atendimento",ai:AI_ALL,title:"E-mail de boas-vindas ao cliente",prompt:`Escreva um e-mail de boas-vindas para novo cliente que assinou o contrato de projeto de [tipo]. Deve transmitir: entusiasmo, profissionalismo, clareza sobre os próximos passos, canal de comunicação preferencial, e como funcionará a parceria.`},
+  {n:97,cat:"Atendimento",ai:AI_ALL,title:"Resposta a cliente insatisfeito",prompt:`Um cliente enviou a seguinte mensagem de insatisfação: "[cole a mensagem]". Redija uma resposta profissional que: reconheça a preocupação, demonstre empatia, proponha uma solução, e preserve o relacionamento. Tom: empático, calmo, firme e solucional.`},
+  {n:98,cat:"Atendimento",ai:AI_ALL,title:"Como apresentar orçamento alto",prompt:`Preciso apresentar ao cliente o orçamento de honorários de R$ [valor] para o projeto de [descreva]. Escreva o roteiro para apresentação do preço que: contextualize pelo resultado entregue, apresente a metodologia e diferenciais, quebre em etapas menores, antecipe a objeção "está caro" e feche pedindo a decisão.`},
+  {n:99,cat:"Atendimento",ai:AI_ALL,title:"Follow-up com lead frio",prompt:`Fiz uma reunião com um potencial cliente para o projeto de [tipo] há [n dias/semanas] sem resposta. Escreva 3 mensagens de follow-up: 1) suave após 7 dias, 2) com conteúdo de valor após 15 dias, 3) last chance após 30 dias. Cada mensagem: curta, personalizada, com CTA claro.`},
+  {n:100,cat:"Atendimento",ai:AI_ALL,title:"Resposta a solicitação fora do escopo",prompt:`O cliente está solicitando [descreva] que não está no contrato. Escreva a resposta que: valorize a solicitação, explique que está fora do escopo, proponha duas opções (aditivo pago ou não incluir), e preserve o relacionamento positivo.`},
+  {n:101,cat:"Atendimento",ai:AI_ALL,title:"Pesquisa de satisfação pós-projeto",prompt:`Crie um questionário de pesquisa de satisfação pós-projeto para clientes. Máx. 8 perguntas, misto (NPS + abertas), cobrindo: processo de trabalho, comunicação, qualidade técnica, cumprimento de prazo e resultado. Inclua a mensagem de convite para envio.`},
+  {n:102,cat:"Atendimento",ai:AI_ALL,title:"Gestão de cliente difícil",prompt:`Tenho um cliente com o seguinte comportamento: [descreva: muda de ideia / não respeita prazos / quer interferir nas decisões técnicas]. Como lidar? Sugira: abordagem de conversa, mecanismos contratuais para proteção, como documentar, e quando considerar rescisão.`},
+  {n:103,cat:"Atendimento",ai:AI_ALL,title:"Carta de entrega final do projeto",prompt:`Escreva um e-mail de entrega formal dos arquivos finais do projeto de [tipo]. Liste: o que está sendo entregue, orientações sobre uso e guarda, direitos de uso do projeto, agradecimento pela parceria, e soft CTA para próximos projetos ou indicações.`},
+
+  // RH & EQUIPE
+  {n:104,cat:"RH & Equipe",ai:AI_ALL,title:"Anúncio de vaga para estagiário",prompt:`Escreva um anúncio de vaga atraente para estagiário de arquitetura/engenharia para escritório especializado em [nicho]. Deve conter: descrição do escritório, atividades, requisitos (obrigatórios e desejáveis), o que oferecemos (bolsa, benefícios, aprendizado), e como se candidatar.`},
+  {n:105,cat:"RH & Equipe",ai:AI_ALL,title:"Roteiro de entrevista técnica",prompt:`Crie um roteiro de entrevista para seleção de [estagiário / arquiteto júnior / coordenador] para escritório com foco em [nicho]. Inclua: perguntas técnicas, comportamentais (método STAR), situações-problema, como avaliar portfólio, e critérios de pontuação para comparar candidatos.`},
+  {n:106,cat:"RH & Equipe",ai:AI_ALL,title:"Plano de onboarding de colaborador",prompt:`Crie um plano de onboarding para os primeiros 30 dias de um [estagiário / arquiteto] no escritório. Organize semana a semana: o que aprender, com quem interagir, quais processos conhecer, primeiras tarefas práticas, e checkpoint de 30 dias.`},
+  {n:107,cat:"RH & Equipe",ai:AI_ALL,title:"Avaliação de desempenho semestral",prompt:`Crie um modelo de avaliação de desempenho semestral para equipe de escritório de arquitetura. Avalie: competências técnicas por função, comportamentais, cumprimento de metas, e iniciativa. Inclua: escala de avaliação, campos para feedback qualitativo, plano de desenvolvimento, e auto-avaliação.`},
+  {n:108,cat:"RH & Equipe",ai:AI_ALL,title:"Feedback construtivo de desempenho",prompt:`Preciso dar feedback para o colaborador [função] sobre: [descreva a situação]. Escreva um roteiro usando o método SCI (Situação-Comportamento-Impacto) que seja: específico, justo, orientado a solução, e que mantenha a motivação do profissional.`},
+  {n:109,cat:"RH & Equipe",ai:AI_ALL,title:"Política de trabalho híbrido",prompt:`Crie uma política de trabalho remoto/híbrido para escritório com [n] pessoas. Defina: quais funções podem ser remotas, dias obrigatórios no escritório, horários de disponibilidade, ferramentas de comunicação, como medir produtividade, e regras para reuniões com clientes.`},
+  {n:110,cat:"RH & Equipe",ai:AI_ALL,title:"Plano de capacitação da equipe",prompt:`Monte um plano de capacitação anual para equipe do escritório. Colaboradores: [liste funções]. Nicho: [descreva]. Mapeie lacunas de conhecimento, sugira cursos e certificações para cada função, estime investimento, e como medir o retorno da capacitação.`},
+  {n:111,cat:"RH & Equipe",ai:AI_ALL,title:"Plano de carreira do escritório",prompt:`Monte um plano de carreira para profissional de arquitetura/engenharia no escritório, passando pelos níveis: estagiário → júnior → pleno → sênior → coordenador → sócio. Para cada nível: competências esperadas, tempo médio, faixa de remuneração, autonomia e critérios de promoção.`},
+  {n:112,cat:"RH & Equipe",ai:AI_ALL,title:"Como reter talentos no escritório",prompt:`Tenho um colaborador talentoso que parece insatisfeito. Perfil: [função, tempo de casa, pontos fortes]. Sugira estratégias de retenção além do salário: plano de carreira, desafios técnicos, autonomia, reconhecimento, benefícios e flexibilidade. Como ter essa conversa?`},
+
+  // CAPTAÇÃO
+  {n:113,cat:"Captação",ai:AI_ALL,title:"Prospecção ativa no LinkedIn",prompt:`Escreva um script de prospecção ativa para enviar via LinkedIn para potenciais clientes do segmento de [nicho]. A mensagem de conexão e a sequência de follow-up deve ter: personalização, gancho de valor, sem pitch direto, e levar à conversa. Gere 3 variações para: novo empreendedor, empresa em expansão e cliente de alto padrão.`},
+  {n:114,cat:"Captação",ai:AI_ALL,title:"Estratégia de indicações (referral)",prompt:`Crie uma estratégia estruturada de captação por indicação. Inclua: quando e como pedir indicações a clientes, roteiro da conversa de pedido, o que oferecer como contrapartida, como agradecer uma indicação, e como acompanhar o pipeline de indicados. Meta: [n] indicações por mês.`},
+  {n:115,cat:"Captação",ai:AI_ALL,title:"Parceria com corretores de imóveis",prompt:`Desenvolva uma estratégia de parceria com corretores de imóveis para captação de projetos. Inclua: abordagem inicial, proposta de valor da parceria, materiais de apoio, mecanismo de rastreamento de indicações, contrapartida para o corretor, e como manter o relacionamento ativo.`},
+  {n:116,cat:"Captação",ai:AI_ALL,title:"Lead magnet — material gratuito",prompt:`Sugira 5 ideias de materiais gratuitos (e-books, checklists, calculadoras) que eu, como [arquiteto/engenheiro] especializado em [nicho], poderia oferecer em troca do e-mail de potenciais clientes. Para a melhor ideia, escreva: título, sumário de conteúdo, chamada para landing page, e como usar no funil de vendas.`},
+  {n:117,cat:"Captação",ai:AI_ALL,title:"Pitch de elevador para networking",prompt:`Escreva 3 versões de pitch de elevador (30 segundos) para me apresentar como [arquiteto/engenheiro] especializado em [nicho] em: evento do setor imobiliário, encontro com potencial parceiro, e almoço com cliente de outro segmento. Cada pitch deve ser memorável e terminar com uma pergunta que abra conversa.`},
+  {n:118,cat:"Captação",ai:AI_ALL,title:"Campanha de Google Ads local",prompt:`Estruture uma campanha de Google Ads para captar clientes interessados em [serviço] em [cidade]. Defina: objetivo, palavras-chave principais e negativas, grupos de anúncios, texto dos anúncios (3 variações), página de destino recomendada, orçamento diário e KPIs de acompanhamento.`},
+  {n:119,cat:"Captação",ai:AI_ALL,title:"Estratégia de SEO local",prompt:`Crie uma estratégia de SEO local para o site do escritório em [cidade]. Inclua: palavras-chave prioritárias por intenção de busca, otimizações on-page essenciais, estratégia de Google Meu Negócio, como conseguir avaliações de clientes, link building local, e conteúdo de blog para cauda longa.`},
+  {n:120,cat:"Captação",ai:AI_ALL,title:"Funil de vendas para alto ticket",prompt:`Estruture um funil de vendas completo para projeto de [alto padrão] com ticket de R$ [valor]. Defina: topo do funil (como atrair o perfil certo), meio do funil (como nutrir e qualificar leads), fundo do funil (como conduzir a reunião de fechamento), e pós-venda (como gerar indicações).`},
+  {n:121,cat:"Captação",ai:AI_ALL,title:"Definição do ICP — cliente ideal",prompt:`Me ajude a definir o ICP (Ideal Customer Profile) para o escritório com foco em [nicho]. Analise: perfil demográfico, comportamento de decisão de compra, motivações para contratar, medos e objeções, canais onde me encontrará, e como ajustar toda a comunicação para atrair esse perfil.`},
+  {n:122,cat:"Captação",ai:AI_ALL,title:"Reativação de clientes antigos",prompt:`Crie uma campanha de reativação para ex-clientes que não contrataram nos últimos [1-3 anos]. Inclua: segmentação dos contatos, mensagem personalizada de reativação, conteúdo de valor por perfil, oferta especial de retorno, e sequência de follow-up.`},
+  {n:123,cat:"Captação",ai:AI_ALL,title:"Pitch para incorporadoras e construtoras",prompt:`Elabore um pitch completo de 15 minutos para apresentar o escritório a uma incorporadora/construtora como parceiro de projeto. Inclua: apresentação do escritório e posicionamento, diferencial técnico e de processo (BIM, coordenação, prazo), portfólio de projetos similares, modelo de parceria proposto, honorários e condições, e como começar com um projeto piloto de baixo risco.`},
+  {n:124,cat:"Captação",ai:AI_ALL,title:"Programa de fidelidade e pós-venda",prompt:`Crie um programa de relacionamento pós-entrega de projeto para gerar recompra e indicações. Defina: cadência de contato após entrega (1 semana, 1 mês, 6 meses, 1 ano), tipo de conteúdo ou valor oferecido em cada contato, como pedir indicações no momento certo, e como registrar e acompanhar o programa no CRM do escritório.`},
+
+  // EXTRAS variados para completar 150
+  {n:125,cat:"Projetos",ai:AI_ALL,title:"Detalhamento de escada e guarda-corpo",prompt:`Elabore o detalhamento técnico completo de uma escada [tipo: reta / em L / helicoidal] para [tipo de edificação], incluindo: dimensionamento de degraus (h e p) conforme NBR 9077, material da estrutura e acabamento, detalhes construtivos de fixação, especificação do guarda-corpo conforme NBR 14718, e ponto crítico de interface com a estrutura.`},
+  {n:126,cat:"Projetos",ai:AI_ALL,title:"Plano de segurança contra incêndio",prompt:`Elabore um roteiro de análise de segurança contra incêndio e pânico para o projeto de [tipo de edificação, área, número de pavimentos], conforme legislação do estado de [UF] e NBR 13434. Identifique: classificação da edificação, saídas de emergência necessárias, sistemas de detecção e combate a incêndio exigidos, sinalização e compartimentação.`},
+  {n:127,cat:"Marketing",ai:AI_ALL,title:"Depoimento escrito para o cliente assinar",prompt:`Escreva 3 versões de depoimento escrito que o cliente [descreva perfil e projeto] poderia assinar para uso no meu marketing. Cada versão deve soar autêntica, destacar um aspecto diferente (processo, resultado, relacionamento), ter entre 50-150 palavras, e ser adequada para: site, Google Meu Negócio e Instagram.`},
+  {n:128,cat:"Contratos",ai:AI_ALL,title:"Contrato de assessoria para compra de imóvel",prompt:`Elabore as cláusulas principais de um contrato de assessoria técnica para compra de imóvel [residencial / comercial]. Defina: escopo dos serviços (análise do imóvel, vistorias, análise documental, laudo técnico), honorários, limitações de responsabilidade, entregáveis e prazo. Como diferenciar esse serviço de uma consultoria imobiliária para evitar conflito com o CRECI.`},
+  {n:129,cat:"Financeiro",ai:AI_ALL,title:"Gestão de custos de projeto",prompt:`Crie um sistema de gestão de custos diretos por projeto. Para cada projeto, rastreie: horas da equipe (custo hora × horas), softwares e licenças alocadas, impressões e maquetes, deslocamentos, subcontratados e terceiros. Como identificar onde o projeto está consumindo mais recursos do que o orçado e tomar ação corretiva?`},
+  {n:130,cat:"Organização",ai:AI_ALL,title:"Controle de horas por projeto",prompt:`Crie um modelo de controle de horas trabalhadas por projeto. Deve permitir: registro diário por colaborador, categorização por fase e tipo de atividade, comparativo com horas orçadas, cálculo de margem por projeto, e exportação para faturamento. Ferramenta: planilha simples ou indicação de app gratuito.`},
+  {n:131,cat:"Atendimento",ai:AI_ALL,title:"Gerenciamento de expectativas",prompt:`O cliente [descreva perfil] tem expectativas irreais sobre [prazo / custo / escopo / resultado]. Como comunicar de forma empática que as expectativas precisam ser ajustadas? Escreva o roteiro de conversa sobre [tema], mantendo o cliente satisfeito e confiante no processo.`},
+  {n:132,cat:"Atendimento",ai:AI_ALL,title:"Gestão de mudanças solicitadas",prompt:`O cliente quer alterar [descreva] na fase de [estudo preliminar / anteprojeto / projeto executivo]. Avalie o impacto em: horas adicionais, prazo, custos de execução, e compatibilidade com o que já foi desenvolvido. Escreva a comunicação ao cliente informando o impacto e propondo como proceder.`},
+  {n:133,cat:"RH & Equipe",ai:AI_ALL,title:"Comunicação de desligamento",prompt:`Preciso comunicar o desligamento do colaborador [função] por [motivo]. Escreva: 1) roteiro da conversa presencial de desligamento, 2) e-mail de comunicação interna para a equipe, 3) carta de dispensa para o colaborador. Tom: respeitoso, claro, humano.`},
+  {n:134,cat:"RH & Equipe",ai:AI_ALL,title:"Política de uso de IA no escritório",prompt:`Crie uma política interna de uso de softwares, IA e ferramentas digitais para escritório de arquitetura. Defina: softwares padrão por função, regras para uso de IA generativa em projetos (o que pode/não pode), licenças compartilhadas, segurança de arquivos, backup e como incorporar novas ferramentas de forma controlada.`},
+  {n:135,cat:"Captação",ai:AI_ALL,title:"Presença em feiras e eventos",prompt:`Crie uma estratégia de presença em feiras e eventos do setor para captação de clientes e parceiros. Inclua: quais tipos de eventos priorizar, como preparar material de apresentação, roteiro de abordagem, como fazer follow-up pós-evento, e como medir o ROI de cada evento.`},
+  {n:136,cat:"Renderização",ai:AI_ALL,title:"Diretrizes de identidade visual de apresentação",prompt:`Crie as diretrizes de identidade visual para as apresentações de projeto do escritório [nome]. Defina: paleta de cores institucionais, tipografia para títulos e corpo de texto, grid de composição de pranchas, padrão de capa e rodapé, formatação de legendas, e como integrar renders, plantas e perspectivas de forma coerente.`},
+  {n:137,cat:"Projetos",ai:AI_ALL,title:"Escopo de projeto para retrofit",prompt:`Elabore o escopo técnico completo para projeto de retrofit de [tipo de edificação existente, ano de construção]. Defina: levantamento arquitetônico necessário, diagnóstico de sistemas existentes (estrutura, instalações, envoltória), fases de projeto, interfaces com outros profissionais, normas aplicáveis e entregáveis mínimos por fase.`},
+  {n:138,cat:"Marketing",ai:AI_ALL,title:"Proposta de parceria com designers de interiores",prompt:`Elabore uma estratégia de parceria com designers de interiores e decoradores para captação mútua de clientes. Defina: proposta de valor para o designer, como delimitar o escopo de cada profissional sem conflito, modelo de indicação mútua, materiais de apoio, e como formalizar a parceria.`},
+  {n:139,cat:"Contratos",ai:AI_ALL,title:"Contrato de mentoria e consultoria técnica",prompt:`Elabore as cláusulas principais de um contrato de mentoria ou consultoria técnica para arquitetos/engenheiros iniciantes. Defina: formato das sessões (presencial/online), frequência, duração, entregáveis do mentorado, honorários e formas de pagamento, sigilo das informações compartilhadas, e condições de cancelamento.`},
+  {n:140,cat:"Financeiro",ai:AI_ALL,title:"Proposta de reajuste de honorários",prompt:`Escreva uma comunicação profissional para informar ao cliente sobre reajuste de honorários de [%] a partir de [data], justificado por [inflação / aumento de custos / reposicionamento]. A comunicação deve ser empática, embasada em dados, e apresentar o novo valor com clareza. Inclua abertura para conversa.`},
+  {n:141,cat:"Organização",ai:AI_ALL,title:"Delegação de tarefas para equipe",prompt:`Preciso delegar tarefas do projeto [descreva] para minha equipe: [liste]. Para cada tarefa, defina: perfil necessário, briefing claro da entrega, prazo, ponto de revisão e critérios de qualidade. Como dar o briefing de forma que minimize retrabalho?`},
+  {n:142,cat:"Atendimento",ai:AI_ALL,title:"Apresentação de opções de projeto",prompt:`Estou apresentando 3 alternativas de [layout / conceito / acabamento] para o projeto de [descreva]. Como estruturar a apresentação para que: o cliente entenda as diferenças claramente, eu possa direcionar para a opção mais adequada sem parecer impositivo, e a decisão seja informada?`},
+  {n:143,cat:"RH & Equipe",ai:AI_ALL,title:"Reunião semanal de equipe eficiente",prompt:`Crie o formato ideal de reunião semanal de equipe para escritório com [n] pessoas. Defina: pauta padrão, duração máxima, dinâmica de participação, como tratar projetos urgentes vs rotina, ferramentas para acompanhamento de ações, e como evitar que a reunião se torne improdutiva. Inclua template de ata rápida.`},
+  {n:144,cat:"Captação",ai:AI_ALL,title:"Proposta de palestra ou workshop",prompt:`Escreva uma proposta para ministrar palestra/workshop sobre [tema] em [evento: associação de moradores, empresa, sindicato, universidade]. Deve conter: título impactante, público-alvo, objetivo, conteúdo programático, formato e duração, minibio do palestrante, e como converter em captação de clientes.`},
+  {n:145,cat:"Projetos",ai:AI_ALL,title:"Análise de viabilidade de loft/studio",prompt:`Analise a viabilidade técnica e de mercado para desenvolvimento de [lofts / studios / flats] em [cidade/bairro]. Considere: perfil do público-alvo, metragem ideal, programa mínimo necessário, potencial construtivo do terreno [descreva], estimativa de custo de construção, preço de venda/locação de mercado e rentabilidade estimada.`},
+  {n:146,cat:"Marketing",ai:AI_ALL,title:"Storytelling da história do escritório",prompt:`Me ajude a construir o storytelling da história do escritório para usar no site, redes sociais e apresentações. A partir dessas informações: [ano de fundação, motivação inicial, projetos marcantes, evolução, valores atuais], crie: parágrafo de origem emocionante, linha do tempo de marcos, frase de missão, e como contar essa história em 30 segundos.`},
+  {n:147,cat:"Fornecedores",ai:AI_ALL,title:"Estratégia de especificação de produtos",prompt:`Como desenvolver uma estratégia inteligente de especificação de produtos e marcas? Considere: como construir parcerias com fabricantes, como obter amostras e projetos de apoio, quando especificar marca definida vs "ou similar", e como usar especificação para agregar valor ao projeto sem perder a liberdade técnica.`},
+  {n:148,cat:"Projetos",ai:AI_ALL,title:"Coordenação de projetos em BIM",prompt:`Crie um protocolo de coordenação de projetos em ambiente BIM para uma equipe de [n] profissionais desenvolvendo o projeto de [tipo de edificação]. Defina: software de referência (Revit / Archicad), padrão de nomenclatura de arquivos e elementos, nível de desenvolvimento (LOD) por fase, processo de detecção de conflitos (clash detection), e fluxo de aprovação de revisões.`},
+  {n:149,cat:"Contratos",ai:AI_ALL,title:"Contrato de parceria com construtora",prompt:`Elabore as cláusulas principais de um contrato de parceria entre escritório de arquitetura e construtora para desenvolvimento de empreendimento [residencial / comercial]. Defina: papel de cada parte no processo, divisão de responsabilidades técnicas, forma de remuneração do escritório (honorários fixos ou participação no resultado), uso da marca, e condições de saída da parceria.`},
+  {n:150,cat:"Organização",ai:AI_ALL,title:"Gestão do conhecimento do escritório",prompt:`Como estruturar um sistema de gestão do conhecimento para preservar e reutilizar o aprendizado de cada projeto? Sugira: onde documentar lições aprendidas, biblioteca de detalhes e especificações, banco de precedentes de projeto, tutoriais de processos internos, e como fazer o onboarding de novos colaboradores com esse material.`},
+];
+
+const PER_PAGE = 20;
+let filtered = [...PROMPTS];
+let activeCat = "Todos";
+let currentPage = 1;
+
+function buildAILegend() {
+  const leg = document.getElementById("aiLegend");
+  leg.innerHTML = `<span class="legend-label">IAs:</span>`;
+  Object.entries(AI).forEach(([k, a]) => {
+    leg.innerHTML += `<span class="ai-chip" style="color:${a.color};background:${a.bg};border-color:${a.border}">${a.svg} ${a.label}</span>`;
+  });
+}
+
+function buildCatFilter() {
+  const cf = document.getElementById("catFilter");
+  const all = document.createElement("button");
+  all.className = "cat-btn active";
+  all.textContent = "Todos (150)";
+  all.onclick = () => setCategory("Todos", all);
+  cf.appendChild(all);
+  CATS.forEach(c => {
+    const count = PROMPTS.filter(p => p.cat === c).length;
+    const btn = document.createElement("button");
+    btn.className = "cat-btn";
+    btn.textContent = `${c} (${count})`;
+    btn.dataset.cat = c;
+    btn.onclick = () => setCategory(c, btn);
+    cf.appendChild(btn);
+  });
+}
+
+function setCategory(cat, btn) {
+  activeCat = cat;
+  currentPage = 1;
+  document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  applyFilter();
+}
+
+function filterPrompts() {
+  currentPage = 1;
+  applyFilter();
+}
+
+function applyFilter() {
+  const q = document.getElementById("searchInput").value.toLowerCase();
+  filtered = PROMPTS.filter(p => {
+    const matchCat = activeCat === "Todos" || p.cat === activeCat;
+    const matchQ = !q || p.title.toLowerCase().includes(q) || p.prompt.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || p.ai.some(k => AI[k]?.label.toLowerCase().includes(q));
+    return matchCat && matchQ;
+  });
+  document.getElementById("headerCount").textContent = `${filtered.length} prompts`;
+  renderPage();
+}
+
+function renderPage() {
+  const list = document.getElementById("promptsList");
+  const start = (currentPage - 1) * PER_PAGE;
+  const items = filtered.slice(start, start + PER_PAGE);
+  if (!items.length) {
+    list.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div>Nenhum prompt encontrado para essa busca.</div>`;
+    document.getElementById("pagination").innerHTML = "";
+    return;
+  }
+  const cc = CAT_COLORS;
+  list.innerHTML = items.map((p, i) => {
+    const c = cc[p.cat] || { bg:"#f0f0f0", text:"#333", border:"#ccc" };
+    const aiBadges = p.ai.map(k => {
+      const a = AI[k];
+      return `<span class="ai-badge" style="color:${a.color};background:${a.bg};border-color:${a.border}">${a.svg} ${a.label}</span>`;
+    }).join("");
+    return `
+    <div class="prompt-card" id="card-${start+i}">
+      <button class="card-trigger" onclick="toggle(${start+i})" aria-expanded="false">
+        <span class="card-num">#${String(p.n).padStart(3,"0")}</span>
+        <div class="card-info">
+          <div class="card-title">${p.title}</div>
+          <div class="card-meta">
+            <span class="cat-badge" style="background:${c.bg};color:${c.text};border:1px solid ${c.border}">${p.cat}</span>
+            <div class="ai-badges">${aiBadges}</div>
+          </div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="card-body">
+        <div class="prompt-box">${escHtml(p.prompt)}</div>
+        <div class="card-actions">
+          <button class="copy-btn" onclick="copyPrompt(event,${start+i})">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copiar prompt
+          </button>
+          <span class="compat-note">Compatível com: ${p.ai.map(k => AI[k]?.label).join(", ")}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+  renderPagination();
+}
+
+function escHtml(t) {
+  return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function toggle(idx) {
+  const card = document.getElementById(`card-${idx}`);
+  const btn = card.querySelector(".card-trigger");
+  const isOpen = card.classList.toggle("open");
+  btn.setAttribute("aria-expanded", isOpen);
+}
+
+function copyPrompt(e, idx) {
+  e.stopPropagation();
+  const p = filtered[idx];
+  navigator.clipboard.writeText(p.prompt).then(() => {
+    const btn = e.currentTarget;
+    const orig = btn.innerHTML;
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copiado!`;
+    btn.classList.add("copied");
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove("copied"); }, 2000);
+  });
+}
+
+function renderPagination() {
+  const total = Math.ceil(filtered.length / PER_PAGE);
+  const pag = document.getElementById("pagination");
+  if (total <= 1) { pag.innerHTML = ""; return; }
+  let h = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?"disabled":""}>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Anterior
+  </button>`;
+  for (let i = 1; i <= total; i++) {
+    if (i===1||i===total||Math.abs(i-currentPage)<=1) {
+      h += `<button class="page-btn ${i===currentPage?"active":""}" onclick="goPage(${i})">${i}</button>`;
+    } else if (Math.abs(i-currentPage)===2) {
+      h += `<span class="page-ellipsis">…</span>`;
+    }
+  }
+  h += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===total?"disabled":""}>
+    Próxima <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>`;
+  pag.innerHTML = h;
+}
+
+function goPage(n) {
+  const total = Math.ceil(filtered.length / PER_PAGE);
+  if (n<1||n>total) return;
+  currentPage = n;
+  renderPage();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+buildCatFilter();
+buildAILegend();
+renderPage();
+</script>
+</body>
+</html>
